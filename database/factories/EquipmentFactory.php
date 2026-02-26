@@ -20,7 +20,8 @@ class EquipmentFactory extends Factory
         return [
             'name' => Str::random(10),
             'description' => Str::random(20),
-            'daily_price' => rand(999, 19999) / 100
+            'daily_price' => rand(999, 19999) / 100,
+            'category_id' => rand(1, 4)
         ];
     }
 }

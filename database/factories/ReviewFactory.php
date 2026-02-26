@@ -19,7 +19,9 @@ class ReviewFactory extends Factory
     {
         return [
             'rating' => rand(1, 10),
-            'comment' => Str::random(20)
+            'comment' => Str::random(20),
+            'user_id' => rand(1, 10),
+            'rental_id' => rand(1, 10)
         ];
     }
 }

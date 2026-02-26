@@ -19,7 +19,9 @@ class RentalFactory extends Factory
         return [
             'start_date' => now(),
             'end_date' => now(),
-            'total_price' => rand(999, 19999) / 100
+            'total_price' => rand(999, 19999) / 100,
+            'user_id' => rand(1, 10),
+            'equipment_id' => rand(1, 5)
         ];
     }
 }

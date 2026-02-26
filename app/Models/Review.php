@@ -3,13 +3,17 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use HasFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Review extends Model
 {
+    use HasFactory;
+
     protected $fillable = [
         'rating',
-        'comment'
+        'comment',
+        'user_id',
+        'rental_id'
     ];
 
     public function user(){
