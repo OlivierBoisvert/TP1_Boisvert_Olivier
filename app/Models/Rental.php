@@ -3,13 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use HasFactory;
 
 class Rental extends Model
 {
     protected $fillable = [
-        'startDate',
-        'endDate',
-        'totalPrice'
+        'start_date',
+        'end_date',
+        'total_price'
     ];
 
     public function user(){

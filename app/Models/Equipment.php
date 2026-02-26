@@ -3,13 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use HasFactory;
 
 class Equipment extends Model
 {
     protected $fillable = [
         'name',
         'description',
-        'dailyPrice'
+        'daily_price'
     ];
 
     public function category(){
