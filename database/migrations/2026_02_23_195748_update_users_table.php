@@ -15,8 +15,8 @@ return new class extends Migration
             $table->string('email', 50)->change();
             //https://laravel.com/docs/master/migrations#modifying-columns
             $table->dropColumn('name');
-            $table->string('firstName', 50);
-            $table->string('lastName', 50);
+            $table->string('first_name', 50);
+            $table->string('last_name', 50);
             $table->dropColumn('email_verified_at');
             $table->dropColumn('password');
             $table->string('phone', 12);

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->timestamps();
             $table->string('name', 50);
             $table->text('description')->nullable();
-            $table->decimal('dailyPrice', 10, 2);
+            $table->decimal('daily_price', 10, 2);
             $table->unsignedBigInteger('category_id');
             $table->foreign('category_id')->references('id')->on('categories');
         });
