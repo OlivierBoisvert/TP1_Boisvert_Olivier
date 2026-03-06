@@ -49,16 +49,19 @@ class EquipmentController extends Controller
             foreach($allRentals as $rental){
                 foreach($allReviews as $review){
                     if($review->rental_id == $rental->id){
-                        $selectedReviews = $review;
+                        $selectedReviews[] = $review;
                     }
                 }
             }
+
+            //Chatgpt "How to turn a php array into a Laravel Collection"
+            $selectedReviews = collect($selectedReviews);
 
             if($selectedReviews->count() == 0){
                 return 0;
             }
 
-            $popularityScore = ($allRentals->count() * 0.6) + ($selectedReviews->rating->avg());
+            $popularityScore = ($allRentals->count() * 0.6) + ($selectedReviews->avg('rating'));
 
             return (response()->json(['popularity' => $popularityScore]))->setStatusCode(OK);
         }
@@ -81,7 +84,7 @@ class EquipmentController extends Controller
             $minDate = $validated['minDate'] ?? null;
             $maxDate = $validated['maxDate'] ?? null;
 
-            if($minDate >= $maxDate){
+            if($minDate != null && $maxDate != null && $minDate >= $maxDate){
                 return (response()->json(['Erreur' => 'minDate doit etre inferieur a maxDate']))->setStatusCode(OK);
             }
 

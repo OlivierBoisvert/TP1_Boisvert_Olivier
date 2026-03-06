@@ -28,7 +28,7 @@ class UserController extends Controller
     public function update(UserRequest $request, string $id){
         try{
             $user = User::findOrFail($id);
-            $user->update($request);
+            $user->update($request->validated());
             return (new UserResource($user))->response()->setStatusCode(CREATED);
         }
         catch(ModelNotFoundException $e){

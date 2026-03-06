@@ -24,7 +24,8 @@ class UserRequest extends FormRequest
         return [
         'first_name' => 'required|string|max:50',
         'last_name'  => 'required|string|max:50',
-        'email'      => 'required|string|email|max:50',
+        //Chatgpt "How could I add a unique rule to my api validation
+        'email'      => 'required|string|email|max:50|unique:users,email,'.$this->id,
         'phone'      => 'required|string|max:12'
     ];
     }

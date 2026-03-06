@@ -1,0 +1,137 @@
+GET http://127.0.0.1:8000/api/equipment
+
+{
+    "data": [
+        {
+            "name": "Vélo de montagne",
+            "description": "Vélo tout-terrain",
+            "daily_price": 35,
+            "category_id": 4
+        },
+        {
+            "name": "Casque de vélo",
+            "description": "Casque de protection homologué",
+            "daily_price": 5,
+            "category_id": 3
+        },
+        {
+            "name": "Skis alpins",
+            "description": "Skis pour piste",
+            "daily_price": 40,
+            "category_id": 1
+        },
+        {
+            "name": "Raquettes de tennis",
+            "description": "Raquette en graphite",
+            "daily_price": 12,
+            "category_id": 1
+        },
+        {
+            "name": "Sac de randonnée",
+            "description": "Sac 40L",
+            "daily_price": 8,
+            "category_id": 2
+        }
+    ],
+    "links": {
+        "first": "http://127.0.0.1:8000/api/equipment?page=1",
+        "last": "http://127.0.0.1:8000/api/equipment?page=1",
+        "prev": null,
+        "next": null
+    },
+    "meta": {
+        "current_page": 1,
+        "from": 1,
+        "last_page": 1,
+        "links": [
+            {
+                "url": null,
+                "label": "&laquo; Previous",
+                "page": null,
+                "active": false
+            },
+            {
+                "url": "http://127.0.0.1:8000/api/equipment?page=1",
+                "label": "1",
+                "page": 1,
+                "active": true
+            },
+            {
+                "url": null,
+                "label": "Next &raquo;",
+                "page": null,
+                "active": false
+            }
+        ],
+        "path": "http://127.0.0.1:8000/api/equipment",
+        "per_page": 20,
+        "to": 5,
+        "total": 5
+    }
+}
+
+
+GET http://127.0.0.1:8000/api/equipment/1
+
+{
+    "data": {
+        "name": "Vélo de montagne",
+        "description": "Vélo tout-terrain",
+        "daily_price": 35,
+        "category_id": 4
+    }
+}
+
+GET http://127.0.0.1:8000/api/equipment/1/popularity
+
+{
+    "popularity": 3.8
+}
+
+GET http://127.0.0.1:8000/api/equipment/1/avgRental
+
+{
+    "avgRental": 83.46666666666667
+}
+
+POST http://127.0.0.1:8000/api/users
+
+Entrant:
+{
+    "first_name": "Jane",
+    "last_name": "Doe",
+    "email": "janedoe@email.com",
+    "phone": "555-555-1234"
+}
+
+Sortant:
+{
+    "data": {
+        "first_name": "Jane",
+        "last_name": "Doe",
+        "email": "janedoe@email.com",
+        "phone": "555-555-1234"
+    }
+}
+
+PUT http://127.0.0.1:8000/api/users/1
+
+Entrant:
+{
+    "first_name": "Jane",
+    "last_name": "Doe",
+    "email": "jane@email.com",
+    "phone": "514-555-1234"
+}
+
+Sortant:
+{
+    "data": {
+        "first_name": "Jane",
+        "last_name": "Doe",
+        "email": "jane@email.com",
+        "phone": "514-555-1234"
+    }
+}
+
+DELETE http://127.0.0.1:8000/api/reviews/1
