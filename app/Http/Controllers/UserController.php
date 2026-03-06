@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\UserRequest;
 use App\Models\User;
 use App\Http\Resources\UserResource;
 use Illuminate\Database\QueryException;
@@ -10,7 +10,7 @@ use Exception;
 
 class UserController extends Controller
 {
-    public function create(Request $request){
+    public function create(UserRequest $request){
 
         try{
             $user = User::create($request->validated());
