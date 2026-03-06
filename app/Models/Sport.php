@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Equipment;
 
 class Sport extends Model
 {
@@ -14,6 +15,6 @@ class Sport extends Model
     ];
 
     public function equipment(){
-        return $this->belongsToMany("App\Models\Equipment");
+        return $this->belongsToMany(Equipment::class);
     }
 }

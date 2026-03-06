@@ -3,6 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
+use App\Models\Equipment;
+use App\Models\Review;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Rental extends Model
@@ -18,14 +21,14 @@ class Rental extends Model
     ];
 
     public function user(){
-        return $this->belongsTo('App\Models\User');
+        return $this->belongsTo(User::class);
     }
 
     public function equipment(){
-        return $this->belongsTo('App\Models\Equipment');
+        return $this->belongsTo(Equipment::class);
     }
 
     public function reviews(){
-        return $this->hasMany('App\Models\Review');
+        return $this->hasMany(Review::class);
     }
 }

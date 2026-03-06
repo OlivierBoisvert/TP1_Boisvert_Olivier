@@ -1,0 +1,71 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Http\Resources\EquipmentResource;
+use App\Models\Equipment;
+use App\Models\Rental;
+use App\Models\Review;
+use Exception;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+
+class EquipmentController extends Controller
+{
+    public function index()
+    {
+        try{
+            return EquipmentResource::collection(Equipment::paginate(PAGINATE_NUMBER))->response()->setStatusCode(OK);
+        }
+        catch(Exception $e){
+            abort(SERVER_ERROR, 'Server error');
+        }
+    }
+
+    public function show(string $id)
+    {
+        try{
+            return (new EquipmentResource(Equipment::findOrFail($id)))->response()->setStatusCode(OK);
+        }
+        //Chatgpt "What Exception is called when a findOrFail fails in laravel?"
+        catch(ModelNotFoundException $e){
+            abort(NOT_FOUND, 'Not found');
+        }
+        catch(Exception $e){
+            abort(SERVER_ERROR, 'Server error');
+        }
+    }
+
+    public function popularity(string $id)
+    {
+        try{
+            $equipment = Equipment::findOrFail($id);
+
+            $allRentals = Rental::all()->where('equipment_id', $id);
+            $allReviews = Review::all();
+
+            $selectedReviews = [];
+
+            foreach($allRentals as $rental){
+                foreach($allReviews as $review){
+                    if($review->rental_id == $rental->id){
+                        $selectedReviews = $review;
+                    }
+                }
+            }
+
+            if($selectedReviews->count() == 0){
+                return 0;
+            }
+
+            $popularityScore = ($allRentals->count() * 0.6) + ($selectedReviews->rating->avg());
+
+            return (response()->json(['popularity' => $popularityScore]))->setStatusCode(OK);
+        }
+        catch(ModelNotFoundException $e){
+            abort(NOT_FOUND, 'Not found');
+        }
+        catch(Exception $e){
+            abort(SERVER_ERROR, 'Server error');
+        }
+    }
+}

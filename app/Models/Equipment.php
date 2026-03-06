@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Category;
+use App\Models\Rental;
+use App\Models\Sport;
 
 class Equipment extends Model
 {
@@ -17,14 +20,14 @@ class Equipment extends Model
     ];
 
     public function category(){
-        return $this->belongsTo('App\Models\Category');
+        return $this->belongsTo(Category::class);
     }
 
     public function rentals(){
-        return $this->hasMany('App\Model\Rental');
+        return $this->hasMany(Rental::class);
     }
 
     public function sports(){
-        return $this->belongsToMany('App\Models\Sport');
+        return $this->belongsToMany(Sport::class);
     }
 }

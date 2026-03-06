@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\User;
+use App\Models\Rental;
 
 class Review extends Model
 {
@@ -17,10 +19,10 @@ class Review extends Model
     ];
 
     public function user(){
-        return $this->belongsTo('App\Models\User');
+        return $this->belongsTo(User::class);
     }
 
     public function rental(){
-        return $this->belongsTo('App\Models\Rental');
+        return $this->belongsTo(Rental::class);
     }
 }

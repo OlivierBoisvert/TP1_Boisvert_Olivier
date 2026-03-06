@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Equipment;
 
 class Category extends Model
 {
@@ -14,6 +15,6 @@ class Category extends Model
     ];
 
     public function equipment(){
-        return $this->hasMany('App\Models\Equipment');
+        return $this->hasMany(Equipment::class);
     }
 }
