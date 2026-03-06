@@ -8,6 +8,7 @@ use App\Models\Rental;
 use App\Models\Review;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\Request;
 
 class EquipmentController extends Controller
 {
@@ -60,6 +61,43 @@ class EquipmentController extends Controller
             $popularityScore = ($allRentals->count() * 0.6) + ($selectedReviews->rating->avg());
 
             return (response()->json(['popularity' => $popularityScore]))->setStatusCode(OK);
+        }
+        catch(ModelNotFoundException $e){
+            abort(NOT_FOUND, 'Not found');
+        }
+        catch(Exception $e){
+            abort(SERVER_ERROR, 'Server error');
+        }
+    }
+
+    public function avgRental(Request $request, string $id){
+        try{
+
+            //Chatgpt "Comment faire la validation de format de date pour une query string en laravel"
+            $validated = $request->validate([
+                'minDate' => 'nullable|date|date_format:Y-m-d',
+                'maxDate' => 'nullable|date|date_format:Y-m-d',
+            ]);
+            $minDate = $validated['minDate'] ?? null;
+            $maxDate = $validated['maxDate'] ?? null;
+
+            if($minDate >= $maxDate){
+                return (response()->json(['Erreur' => 'minDate doit etre inferieur a maxDate']))->setStatusCode(OK);
+            }
+
+            $rentals = Rental::all()->where('equipment_id', $id);
+
+        if ($minDate) {
+            $rentals->where('start_date', '>=', $minDate);
+        }
+
+        if ($maxDate) {
+            $rentals->where('end_date', '<=', $maxDate);
+        }
+
+        $avgRental = $rentals->avg('total_price');
+
+        return (response()->json(['avgRental' => $avgRental]))->setStatusCode(OK);
         }
         catch(ModelNotFoundException $e){
             abort(NOT_FOUND, 'Not found');
