@@ -15,7 +15,7 @@ class UserController extends Controller
 
         try{
             $user = User::create($request->validated());
-            return (new UserResource($user))->response()->setStatusCode(OK);
+            return (new UserResource($user))->response()->setStatusCode(CREATED);
         }
         catch(QueryException $e){
             abort(INVALID_DATA, 'Invalid data');

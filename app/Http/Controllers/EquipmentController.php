@@ -58,7 +58,7 @@ class EquipmentController extends Controller
             $selectedReviews = collect($selectedReviews);
 
             if($selectedReviews->count() == 0){
-                return 0;
+                return (response()->json(['popularity' => 0]))->setStatusCode(OK);
             }
 
             $popularityScore = ($allRentals->count() * 0.6) + ($selectedReviews->avg('rating'));
